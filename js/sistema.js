@@ -62,6 +62,7 @@ var onSuccessGPS  = function(position) {
                     var precision = position.coords.accuracy;
                    //solicita el listado de EMAs al WebServer por JSONP
             	   $jsonp.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
+                   //$jsonp.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
                             callbackName: 'handleStuff',
                             onSuccess: function(json){
                                     var datosEMA=json;
@@ -97,7 +98,7 @@ var onSuccessGPS  = function(position) {
                                     var select = document.getElementById("comboemas");
                                     select.appendChild(option);
                             },
-                            timeout: 1000
+                            timeout: 5
                         });
            
     }
@@ -106,7 +107,8 @@ var onSuccessGPS  = function(position) {
                         hayGPS=false;
                         document.getElementById('gps').className = 'estado no';
                         
-                        $jsonp.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
+                         $jsonp.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
+                         //$jsonp.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {   
                             callbackName: 'handleStuff',
                             onSuccess: function(json){
                                    
@@ -141,7 +143,7 @@ var onSuccessGPS  = function(position) {
                                             var select = document.getElementById("comboemas");
                                             select.appendChild(option);
                                     },
-                                    timeout: 1000
+                                    timeout: 5
                                 });
                         
     }         function verDatosEMA(){
@@ -155,11 +157,10 @@ var onSuccessGPS  = function(position) {
                         publicarDatosEMA(emaSeleccionada,datosEMA);
                 });
                */ 
-                // var URL = 'http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
-                 var URL = 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
+                 //var URL = 'http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
+                   var URL = 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
                 xmlHttp.open("GET", URL, false); //true mean call is asynchronous
-               xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
-               // xmlHttp.onreadystatechange = getweatherData;
+                xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
                 xmlHttp.send(null);
               
                 $jsonp.send('http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
@@ -179,6 +180,49 @@ var onSuccessGPS  = function(position) {
                                 document.getElementById("presion").innerHTML=datosEMA.presion+'mB';
                                 document.getElementById("lluvia").innerHTML=datosEMA.lluvia+' mm';
                                 document.getElementById("viento").innerHTML=datosEMA.viento+' km/h';
+                                
+                                weather = {};
+                                units='C';
+                                limitesuperior=document.getElementById("limitesuperior").value;
+                                limiteinferior=document.getElementById("limiteinferior").value;
+                                if (parseFloat(datosEMA.temperatura) > limitesuperior) {
+                                   $('#clima').delay(1500).css('background-color', '#F7AC57');
+                                       //animate({backgroundColor: '#F7AC57'}, 1500);
+                                 } else {
+                                     if (parseFloat(datosEMA.temperatura) < limiteinferior){
+                                        $('#clima').delay(1500).css('background-color', '#0091c2');
+                                            //animate({backgroundColor: '#0091c2'}, 1500);
+                                     }
+                                     else {
+                                         $('#clima').delay(1500).css('background-color', '#84FF8E');
+                                             //animate({backgroundColor: '#84FF8E'}, 1500);
+                                     }
+                                 }
+                                moment.locale('es');
+                                fecha1 ='20'+moment(datosEMA.fecha,['DD/MM/YY','D/MM/YY']).format('YY-MM-DD')+' '+datosEMA.hora;;
+                                //console.log('ti='+fecha1);
+                                fecha2=moment(fecha1).format('DD/MM/YYYY HH:mm');
+                                //console.log('t='+fecha1);
+                                html = '<ul><li id="ema" onClick="overlay();">'+datosEMA.estacion+'</li></ul>';
+                                html += '<h2>'+datosEMA.temperatura+'&deg;'+units+'</h2>';
+                                html += '<ul><li>'+moment(fecha1).format('DD/MM/YYYY HH:mm')+'</li>';
+                                html += '<ul><br /><li class="currently"><b>Humedad:</b>'+datosEMA.humedad+' %'+'</li></ul>';
+                                html += '</ul><br /><ul><li><b>Presion:</b>'+datosEMA.presion+' mBar'+'</li></ul>';
+                                html += '</ul><br /><ul><li><b>Viento:</b>'+datosEMA.viento+' km/h'+'</li><li>'+datosEMA.dirViento+'</li></ul>';
+                                html += '</ul><br /><ul><li><b>Ráfagas:</b>'+datosEMA.rafagas+' km/h'+'</li></ul>';
+                                //datosEMA.fecha=moment(datosEMA.fecha,"YY-MM-DD");
+
+
+                                 //fecha='20'+datosEMA.fecha+' '+datosEMA.hora;
+                                 var timestamp = moment(fecha2,'DD-MM-YYYY HH:mm');
+
+                                 html += '<p>Actualizado '+moment(timestamp).fromNow()+'</p>';
+
+
+                                $("#weather").html(html);                                
+                                
+                                
+                                
                         } else {
                                 document.getElementById("ema").innerHTML="Problemas con la EMA";
                                 document.getElementById("temperatura").innerHTML='Sin Datos';
@@ -186,6 +230,8 @@ var onSuccessGPS  = function(position) {
                                 document.getElementById("presion").innerHTML='Sin Datos';
                                 document.getElementById("lluvia").innerHTML='Sin Datos';
                                 document.getElementById("viento").innerHTML='Sin Datos';
+                                error='<ul><li id="ema" onClick="overlay();"><p>Problemas con la Estacion</p></li></ul>';
+                                $("#weather").html('<p>'+error+'</p>');
                               }
                         },
                                                
@@ -198,10 +244,12 @@ var onSuccessGPS  = function(position) {
                             document.getElementById("presion").innerHTML='Sin Datos';
                             document.getElementById("lluvia").innerHTML='Sin Datos';
                             document.getElementById("viento").innerHTML='Sin Datos';
+                            error='Problemas de comunicacion';
+                              $("#weather").html('<p>'+error+'</p>');
                         },
-                    timeout: 1000
+                    timeout: 5
                 });
                 
-                
+              setTimeout(verDatosEMA,2*60*1000);  
           }
     

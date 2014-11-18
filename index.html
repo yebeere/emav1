@@ -1,17 +1,13 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
-Version: 0.1 :D!!
-More info: http://jquerymobile.com/demos/1.1.0/docs/about/getting-started.html
--->
+
 <!DOCTYPE html> 
 <html> 
 	<head> 
 	<title>AgroCLIMA</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
         <meta charset="utf-8" />
+        
         <link rel="stylesheet" href="libs/jQueryMobile/jquery.mobile.theme-1.4.4.min.css" />
-
+        <link rel="stylesheet" href="css/jquery-ui.css" />
         <link href="css/sistemas.css" rel="stylesheet" type="text/css"/>
         
         <link rel="stylesheet" href="themes/Bootstrap.css">
@@ -21,6 +17,8 @@ More info: http://jquerymobile.com/demos/1.1.0/docs/about/getting-started.html
         <script src="libs/jQueryMobile/jquery.mobile-1.4.4.min.js" type="text/javascript"></script>
          <script src="js/clienterest.js" type="text/javascript"></script>
         <script src="js/sistema.js" type="text/javascript"></script>
+          <script src="" type="text/javascript"></script>
+        <script src="js/moment-with-locales.js"></script>
         <script type="text/javascript">
             try{var xmlHttp = new XMLHttpRequest()}
 						catch (e){var xmlHttp = new ActiveXObject('Microsoft.XMLHTTP')}
@@ -89,14 +87,15 @@ More info: http://jquerymobile.com/demos/1.1.0/docs/about/getting-started.html
 
                             </div>
                             <div data-role="rangeslider">
-                                  <label for="range-10a">Rango de Temperaturas:</label>
-                                  <input name="range-10a" id="range-10a" min="-10" max="40" step="1" value="-1" type="range" data-highlight="true"  />
-                                  <label for="range-10b">Rango de Temperaturas:</label>
-                                  <input name="range-10b" id="range-10b" min="-10" max="40" step="1" value="27" type="range" data-highlight="true" />
+                                  <label for="limiteinferior">Rango de Temperaturas:</label>
+                                  <input name="limiteinferior" id="limiteinferior" min="-10" max="40" step="1" value="-1" type="range" data-highlight="true"  />
+                                  <label for="limitesuperior">Rango de Temperaturas:</label>
+                                  <input name="limitesuperior" id="limitesuperior" min="-10" max="40" step="1" value="27" type="range" data-highlight="true" />
                             </div>
                     </form>
                     <div id="menu">
-                         <a data-icon="flat-checkround" data-theme="d" href="#third-page" data-role="button" onclick="verDatosEMA();" >Ver datos actuales</a>
+                       <!--  <a data-icon="flat-checkround" data-theme="d" href="#third-page" data-role="button" onclick="verDatosEMA();" >Ver datos actuales</a>  -->
+                       <a data-icon="flat-checkround" data-theme="d" href="#second-page" data-role="button" onclick="verDatosEMA();" >Ver datos actuales</a>
                     </div>
                  <div data-role="footer">
             		
@@ -113,8 +112,12 @@ More info: http://jquerymobile.com/demos/1.1.0/docs/about/getting-started.html
                 	<a href="#homepage" data-icon="back" data-theme="b">Inicio</a>
                     <h3>Datos Actuales</h3>
                 </div>
-                <div data-role="content" id="riego">
+                <div data-role="content" id="clima">
                     
+                 <div id="weather">
+                     <img src="images/loader.gif" alt="Cargando..." class="loading"><br />Cargando...
+
+                 </div>  
                     
                 </div>
                 <div data-role="footer">
