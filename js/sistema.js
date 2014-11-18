@@ -172,15 +172,7 @@ var onSuccessGPS  = function(position) {
                         if (json.error==""){
                                 //alert(json.error);
                                 var datosEMA=json;
-                                document.getElementById("ema").innerHTML=datosEMA.estacion;
-                                document.getElementById("date").innerHTML=datosEMA.fecha;
-                                document.getElementById("hour").innerHTML=datosEMA.hora;
-                                document.getElementById("temperatura").innerHTML=datosEMA.temperatura+' ºC';
-                                document.getElementById("humedad").innerHTML=datosEMA.humedad+' %';
-                                document.getElementById("presion").innerHTML=datosEMA.presion+'mB';
-                                document.getElementById("lluvia").innerHTML=datosEMA.lluvia+' mm';
-                                document.getElementById("viento").innerHTML=datosEMA.viento+' km/h';
-                                
+                               
                                 weather = {};
                                 units='C';
                                 limitesuperior=document.getElementById("limitesuperior").value;
@@ -224,12 +216,7 @@ var onSuccessGPS  = function(position) {
                                 
                                 
                         } else {
-                                document.getElementById("ema").innerHTML="Problemas con la EMA";
-                                document.getElementById("temperatura").innerHTML='Sin Datos';
-                                document.getElementById("humedad").innerHTML='Sin Datos';
-                                document.getElementById("presion").innerHTML='Sin Datos';
-                                document.getElementById("lluvia").innerHTML='Sin Datos';
-                                document.getElementById("viento").innerHTML='Sin Datos';
+                                
                                 error='<ul><li id="ema" onClick="overlay();"><p>Problemas con la Estacion</p></li></ul>';
                                 $("#weather").html('<p>'+error+'</p>');
                               }
@@ -237,20 +224,14 @@ var onSuccessGPS  = function(position) {
                                                
                         onTimeout: function(){
                             //console.log('timeout!');
-                            document.getElementById("ema").innerHTML='Sin Datos';
-                            document.getElementById("date").innerHTML='Sin Datos';
-                            document.getElementById("temperatura").innerHTML='Sin Datos';
-                            document.getElementById("humedad").innerHTML='Sin Datos';
-                            document.getElementById("presion").innerHTML='Sin Datos';
-                            document.getElementById("lluvia").innerHTML='Sin Datos';
-                            document.getElementById("viento").innerHTML='Sin Datos';
+                            
                             error='Problemas de comunicacion';
                               $("#weather").html('<p>'+error+'</p>');
                         },
                     timeout: 5
                 });
-              navigator.app.clearCache();
+             // navigator.app.clearCache();
+              setTimeout(verDatosEMA,2*60*1000);
               window.cache.clear();
-              setTimeout(verDatosEMA,2*60*1000);  
           }
     
