@@ -263,9 +263,9 @@ root {
 
 
 #weather {
-  width: 425px;
-  margin: 0px auto;
-  text-align: center;
+	width: 400px;
+	margin: 0px auto;
+	text-align: center;
   /*text-transform: uppercase; */
 }
 

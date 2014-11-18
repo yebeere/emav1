@@ -159,9 +159,9 @@ var onSuccessGPS  = function(position) {
                */ 
                  //var URL = 'http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
                    var URL = 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
-                xmlHttp.open("GET", URL, false); //true mean call is asynchronous
-                xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
-                xmlHttp.send(null);
+               // xmlHttp.open("GET", URL, false); //true mean call is asynchronous
+              //  xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
+               // xmlHttp.send(null);
               
                 $jsonp.send('http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
                 //$jsonp.send('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
@@ -249,7 +249,8 @@ var onSuccessGPS  = function(position) {
                         },
                     timeout: 5
                 });
-                
+              navigator.app.clearCache();
+              window.cache.clear();
               setTimeout(verDatosEMA,2*60*1000);  
           }
     
