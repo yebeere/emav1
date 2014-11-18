@@ -155,14 +155,15 @@ var onSuccessGPS  = function(position) {
                         publicarDatosEMA(emaSeleccionada,datosEMA);
                 });
                */ 
-                 var URL = 'http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
+                // var URL = 'http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
+                 var URL = 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
                 xmlHttp.open("GET", URL, false); //true mean call is asynchronous
                xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
                // xmlHttp.onreadystatechange = getweatherData;
                 xmlHttp.send(null);
               
-                //$jsonp.send('http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
-                $jsonp.send('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
+                $jsonp.send('http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
+                //$jsonp.send('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
                         callbackName: 'handleStuff',
                         onSuccess: function(json){
                       //  console.log('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff');
