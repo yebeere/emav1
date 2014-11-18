@@ -146,7 +146,8 @@ var onSuccessGPS  = function(position) {
                                     timeout: 5
                                 });
                         
-    }         function verDatosEMA(){
+    }
+    function verDatosEMA(){
                 var e = document.getElementById("comboemas");
                 var emaSeleccionada = e.options[e.selectedIndex].value;
                 if (emaSeleccionada==='Estaciones Meteorológicas') {emaSeleccionada=0;}
@@ -231,7 +232,14 @@ var onSuccessGPS  = function(position) {
                     timeout: 5
                 });
              // navigator.app.clearCache();
+              //setTimeout(verDatosEMA,2*60*1000);
+              //window.cache.clear();
+          }
+    function datos(){
+              verDatosEMA();
+           // navigator.app.clearCache();
               setTimeout(verDatosEMA,2*60*1000);
               window.cache.clear();
-          }
-    
+              navigator.app.clearCache();
+        
+    }

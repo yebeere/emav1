@@ -26,7 +26,7 @@
             // consultamos si exite conexion a la red
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
-              // window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
+               window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
                document.addEventListener("offline", isOffline(), false); //Fuera de red
                document.addEventListener("online", isOnline(), false);   //En red
                //navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
@@ -34,7 +34,7 @@
                document.addEventListener("backbutton", function(e){
                         if($.mobile.activePage.is('#homepage')){
                             e.preventDefault();
-                         //  window.plugins.toast.showLongCenter("Gracias por utilizar AgroCLIMA!!");
+                           window.plugins.toast.showLongCenter("Gracias por utilizar AgroCLIMA!!");
                            //alert("Gracias por utilizar AgroCLIMA!!");
                             navigator.app.exitApp();
                         }
@@ -96,7 +96,7 @@
                     </form>
                     <div id="menu">
                        <!--  <a data-icon="flat-checkround" data-theme="d" href="#third-page" data-role="button" onclick="verDatosEMA();" >Ver datos actuales</a>  -->
-                       <a data-icon="flat-checkround" data-theme="d" href="#second-page" data-role="button" onclick="verDatosEMA();" >Ver datos actuales</a>
+                       <a data-icon="flat-checkround" data-theme="d" href="#second-page" data-role="button" onclick="datos();" >Ver datos actuales</a>
                     </div>
                 
 	</div><!-- /content -->
