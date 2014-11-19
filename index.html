@@ -26,11 +26,7 @@
             // consultamos si exite conexion a la red
             //document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
-              if ($('#apagado').value=='no'){
-                  window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
-               } else {
-                   window.plugins.insomnia.allowSleepAgain();// volver a permitir apagado de pantalla
-               }  
+              
                document.addEventListener("offline", isOffline(), false); //Fuera de red
                document.addEventListener("online", isOnline(), false);   //En red
                //navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
@@ -38,7 +34,7 @@
                document.addEventListener("backbutton", function(e){
                         if($.mobile.activePage.is('#homepage')){
                             e.preventDefault();
-                          window.plugins.toast.showLongCenter("Gracias por utilizar AgroCLIMA!!");
+                            window.plugins.toast.showLongCenter("Gracias por utilizar AgroCLIMA!!");
                            //alert("Gracias por utilizar AgroCLIMA!!");
                             navigator.app.exitApp();
                         }
