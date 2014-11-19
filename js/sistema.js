@@ -34,24 +34,6 @@ function distance(lat1,lon1,lat2,lon2) {
 	return d;
 }
 
-var menorDistancia= new Array(7);
-function ordenGPS(position){
-       // calculo la distancia de c/u de las EMA y lo guardo en MenorDistancia
-       for (var i = 0; i < 7; i++) {
-                //
-                ema[i][5] = distance(ema[i][1],ema[i][2],-38.57,-68.36);
-                //ema[i][5] = distance(ema[i][1],ema[i][2],position.coords.latitude,position.coords.longitude);
-       }
-        ema.sort(function(a,b) {
-                            return a[5]- b[5];
-                });
-//       for (var i = 0; i < 7; i++) {         
-//         $("<option value='"+(i+1)+"'>"+ema[i][0]+"</option>").appendTo("#esta"); 
-//       }
-       //$("#esta option[value=1]").attr("selected",true);
-
-       document.getElementById('estaciones').innerHTML = ema;         
-}
 
 
 var onSuccessGPS  = function(position) {
@@ -68,6 +50,7 @@ var onSuccessGPS  = function(position) {
                                 success: function(json){
                                     var datosEMA=json;
                                     cantidad=datosEMA.length;
+                                    alert('Cant='+cantidad);
                                     texto="";
                                     var i;
                                     for (i=0;i<cantidad;i++) {
