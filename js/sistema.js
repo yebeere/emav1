@@ -63,11 +63,11 @@ var onSuccessGPS  = function(position) {
                                                     return a[5]- b[5];
                                         });
                                     //asigna
-                                    for (var i = 0; i < cantidad; i++) { 
+                                    for (var j = 0; j < cantidad; j++) { 
                                        //var j=i;
-                                      $("<option value='"+i+"'>"+ema[i][0]+" (Dist:"+Math.round(ema[i][5]) +" km) </option>").appendTo("#comboemas");
-                                      var myselect = $("#comboemas");
-                                      myselect.selectmenu('refresh');
+                                      $("<option value='"+j+"'>"+ema[j][0]+" (Dist:"+Math.round(ema[j][5]) +" km) </option>").appendTo("#comboemas");
+//                                      var myselect = $("#comboemas");
+//                                      myselect.selectmenu('refresh');
                                     }
 
                                     $("#comboemas option[value=0]").attr("selected",true);
