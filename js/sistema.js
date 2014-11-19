@@ -61,10 +61,11 @@ var onSuccessGPS  = function(position) {
                     var longitud = position.coords.longitude;
                     var precision = position.coords.accuracy;
                    //solicita el listado de EMAs al WebServer por JSONP
-            	   $jsonpfuncion.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
-                   //$jsonpfuncion.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
-                            callbackName: 'handleStuff',
-                            onSuccess: function(json){
+                   $.ajax({
+                                url: 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff',
+                                type: "GET",
+                                dataType: "jsonp",
+                                success: function(json){
                                     var datosEMA=json;
                                     cantidad=datosEMA.length;
                                     texto="";
@@ -89,16 +90,7 @@ var onSuccessGPS  = function(position) {
                                     $("#comboemas option[value=0]").attr("selected",true);
                                     var myselect = $("#comboemas");
                                     myselect.selectmenu('refresh');
-                            },
-                            onTimeout: function(){
-                                //console.log('timeout!');
-                                    var option = document.createElement("option");
-                                    option.text ="Hay problemas";
-                                    option.value = 0;
-                                    var select = document.getElementById("comboemas");
-                                    select.appendChild(option);
-                            },
-                            timeout: 5
+                            }
                         });
            
     }
@@ -107,10 +99,11 @@ var onSuccessGPS  = function(position) {
                         hayGPS=false;
                         document.getElementById('gps').className = 'estado no';
                         
-                         $jsonpfuncion.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
-                         //$jsonpfuncion.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {   
-                            callbackName: 'handleStuff',
-                            onSuccess: function(json){
+                         $.ajax({
+                                url: 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff',
+                                type: "GET",
+                                dataType: "jsonp",
+                                success: function(json){
                                    
                                     var datosEMA=json;
                                     var cantidad=datosEMA.length;
@@ -134,16 +127,7 @@ var onSuccessGPS  = function(position) {
                                     $("#comboemas option[value=0]").attr("selected",true);
                                     var myselect = $("#comboemas");
                                     myselect.selectmenu('refresh');
-                                    },
-                                    onTimeout: function(){
-                                        //console.log('timeout!');
-                                            var option = document.createElement("option");
-                                            option.text ="Hay problemas";
-                                            option.value = 0;
-                                            var select = document.getElementById("comboemas");
-                                            select.appendChild(option);
-                                    },
-                                    timeout: 5
+                                    }
                                 });
                         
     }
