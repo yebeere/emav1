@@ -61,8 +61,8 @@ var onSuccessGPS  = function(position) {
                     var longitud = position.coords.longitude;
                     var precision = position.coords.accuracy;
                    //solicita el listado de EMAs al WebServer por JSONP
-            	   $jsonp1.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
-                   //$jsonp.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
+            	   $jsonpfuncion.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
+                   //$jsonpfuncion.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
                             callbackName: 'handleStuff',
                             onSuccess: function(json){
                                     var datosEMA=json;
@@ -107,8 +107,8 @@ var onSuccessGPS  = function(position) {
                         hayGPS=false;
                         document.getElementById('gps').className = 'estado no';
                         
-                         $jsonp1.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
-                         //$jsonp.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {   
+                         $jsonpfuncion.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
+                         //$jsonpfuncion.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {   
                             callbackName: 'handleStuff',
                             onSuccess: function(json){
                                    
@@ -151,25 +151,7 @@ var onSuccessGPS  = function(position) {
                 var e = document.getElementById("comboemas");
                 var emaSeleccionada = e.options[e.selectedIndex].value;
                 if (emaSeleccionada==='Estaciones Meteorológicas') {emaSeleccionada=0;}
-                //console.log(emaSeleccionada+'  #  '+ema[emaSeleccionada][4]);
-              /*  
-                retornaDatosEma(ema[emaSeleccionada][4],function(datosEMA){
-                        //console.log(datosEMA);
-                        publicarDatosEMA(emaSeleccionada,datosEMA);
-                });
-               */ 
-                 //var URL = 'http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
-                   var URL = 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff';
-               // xmlHttp.open("GET", URL, false); //true mean call is asynchronous
-              //  xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
-               // xmlHttp.send(null);
-              
-//                        $jsonp1.send('http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
-//                //$jsonp1.send('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
-//                        callbackName: 'handleStuff',
-//                        onSuccess: function(json){
-//                      //  console.log('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff');
-                      //  console.log('success!', json);
+
                      $.ajax({
                                 url: 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=rr',
                                 type: "GET",
@@ -187,11 +169,15 @@ var onSuccessGPS  = function(position) {
                                 limiteinferior=document.getElementById("limiteinferior").value;
                                 if (parseFloat(datosEMA.temperatura) > limitesuperior) {
                                    $('#clima').delay(1500).css('background-color', '#F7AC57');
+                                           navigator.notification.vibrate(1000);
+                                           navigator.notification.beep(1);   
                                        //animate({backgroundColor: '#F7AC57'}, 1500);
                                  } else {
                                      if (parseFloat(datosEMA.temperatura) < limiteinferior){
                                         $('#clima').delay(1500).css('background-color', '#0091c2');
                                             //animate({backgroundColor: '#0091c2'}, 1500);
+                                           navigator.notification.vibrate(1000);
+                                           navigator.notification.beep(2);
                                      }
                                      else {
                                          $('#clima').delay(1500).css('background-color', '#84FF8E');
@@ -229,18 +215,7 @@ var onSuccessGPS  = function(position) {
                                 $("#weather").html('<p>'+error+'</p>');
                               }
                         }   
-                                               
-//                        onTimeout: function(){
-//                            //console.log('timeout!');
-//                            
-//                            error='Problemas de comunicacion';
-//                              $("#weather").html('<p>'+error+'</p>');
-//                        },
-//                    timeout: 5
                 });
-             // navigator.app.clearCache();
-              //setTimeout(verDatosEMA,2*60*1000);
-              //window.cache.clear();
           }
     function datos(){
               //window.cache.clear();
