@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
     var ema= new Array();
+    var ls=false;
+    var li=false;
     function isOffline() {
                      //  alert ('Su dispositivo móvil esta fuera de línea');
                        document.getElementById('net').className = 'estado no'; //pone la cruz roja de sin red
@@ -50,7 +52,6 @@ var onSuccessGPS  = function(position) {
                                 success: function(json){
                                     var datosEMA=json;
                                     cantidad=datosEMA.length;
-                                    alert('Cant='+cantidad);
                                     texto="";
                                     var i;
                                     for (i=0;i<cantidad;i++) {
@@ -132,22 +133,32 @@ var onSuccessGPS  = function(position) {
                                
                                 weather = {};
                                 units='C';
+                                
                                 limitesuperior=document.getElementById("limitesuperior").value;
                                 limiteinferior=document.getElementById("limiteinferior").value;
                                 if (parseFloat(datosEMA.temperatura) > limitesuperior) {
+                                    
                                    $('#clima').delay(1500).css('background-color', '#F7AC57');
-                                           navigator.notification.vibrate(1000);
-                                           navigator.notification.beep(1);   
+                                   $('#weather h2').css('color', '#fff');
+                                     navigator.notification.vibrate(1000);
+                                     if ($('#sonido').value=='si')
+                                          {if (!ls) { navigator.notification.beep(1);   }}
+                                     ls=true;
                                        //animate({backgroundColor: '#F7AC57'}, 1500);
                                  } else {
                                      if (parseFloat(datosEMA.temperatura) < limiteinferior){
                                         $('#clima').delay(1500).css('background-color', '#0091c2');
+                                        $('#weather h2').css('color', '#fff');
                                             //animate({backgroundColor: '#0091c2'}, 1500);
                                            navigator.notification.vibrate(1000);
-                                           navigator.notification.beep(2);
+                                           if ($('#sonido').value=='si')
+                                                {if (!li) { navigator.notification.beep(1);   }}
+                                            li=true;
+                                           
                                      }
                                      else {
                                          $('#clima').delay(1500).css('background-color', '#84FF8E');
+                                         $('#weather h2').css('color', '#000');
                                              //animate({backgroundColor: '#84FF8E'}, 1500);
                                      }
                                  }
@@ -185,13 +196,9 @@ var onSuccessGPS  = function(position) {
                 });
           }
     function datos(){
-              //window.cache.clear();
-              //navigator.app.clearCache();
               $.ajaxSetup({ cache:false });
               verDatosEMA();
-           // navigator.app.clearCache();
               setTimeout(datos,2*60*1000);
-              
               window.cache.clear();
               navigator.app.clearCache();
         

@@ -26,7 +26,11 @@
             // consultamos si exite conexion a la red
             //document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
-              // window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
+              if ($('#apagado').value=='no'){
+                  window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
+               } else {
+                   window.plugins.insomnia.allowSleepAgain();// volver a permitir apagado de pantalla
+               }  
                document.addEventListener("offline", isOffline(), false); //Fuera de red
                document.addEventListener("online", isOnline(), false);   //En red
                //navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
@@ -34,7 +38,7 @@
                document.addEventListener("backbutton", function(e){
                         if($.mobile.activePage.is('#homepage')){
                             e.preventDefault();
-                          //window.plugins.toast.showLongCenter("Gracias por utilizar AgroCLIMA!!");
+                          window.plugins.toast.showLongCenter("Gracias por utilizar AgroCLIMA!!");
                            //alert("Gracias por utilizar AgroCLIMA!!");
                             navigator.app.exitApp();
                         }
@@ -78,7 +82,7 @@
                     </tr>  -->
                    
                     </table>	
-                    <form id="formulario" data-transition="pop">
+                    
                             <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
 
                                     <select id="comboemas" data-native-menu="false" name="comboemas" tabindex="-1" data-mini="true">
@@ -87,18 +91,33 @@
                                     </select>
 
                             </div>
-                            <div data-role="rangeslider">
+                           
+                    <div id="menu">
+                       <!--  <a data-icon="flat-checkround" data-theme="d" href="#third-page" data-role="button" onclick="verDatosEMA();" >Ver datos actuales</a>  -->
+                       <a data-icon="flat-checkround" data-theme="d" href="#second-page" data-role="button" onclick="datos();" >Ver datos actuales</a>
+                    </div>
+            <h2>Alarmas:</h2>
+                  <div data-role="rangeslider">
                                   <label for="limiteinferior">Rango de Temperaturas:</label>
                                   <input name="limiteinferior" id="limiteinferior" min="-10" max="40" step="1" value="-1" type="range" data-highlight="true"  />
                                   <label for="limitesuperior">Rango de Temperaturas:</label>
                                   <input name="limitesuperior" id="limitesuperior" min="-10" max="40" step="1" value="27" type="range" data-highlight="true" />
                             </div>
-                    </form>
-                    <div id="menu">
-                       <!--  <a data-icon="flat-checkround" data-theme="d" href="#third-page" data-role="button" onclick="verDatosEMA();" >Ver datos actuales</a>  -->
-                       <a data-icon="flat-checkround" data-theme="d" href="#second-page" data-role="button" onclick="datos();" >Ver datos actuales</a>
-                    </div>
-                
+                    
+                 <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
+                     <label for="sonido">Alarma sonora:</label>
+                        <select name="sonido" id="sonido" data-role="slider">
+                                <option value="no">No</option>
+                                <option value="si">Si</option>
+                        </select>
+                 </div> 
+                   <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">  
+                    <label for="apagado">Apagado de pantalla:</label>
+                        <select name="apagado" id="apagado" data-role="slider">
+                                <option value="no">No</option>
+                                <option value="si">Si</option>
+                        </select>
+                 </div>   
 	</div><!-- /content -->
         <div data-role="footer">
             		
