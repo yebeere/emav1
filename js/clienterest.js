@@ -4,7 +4,7 @@
  */
 
         // decodifica el JSONP
-        var $jsonp = (function(){
+        var $jsonp1 = (function(){
                 var that = {};
                 that.send = function(src, options) {
                   var callback_name = options.callbackName || 'callback',

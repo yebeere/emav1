@@ -61,7 +61,7 @@ var onSuccessGPS  = function(position) {
                     var longitud = position.coords.longitude;
                     var precision = position.coords.accuracy;
                    //solicita el listado de EMAs al WebServer por JSONP
-            	   $jsonp.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
+            	   $jsonp1.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
                    //$jsonp.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
                             callbackName: 'handleStuff',
                             onSuccess: function(json){
@@ -107,7 +107,7 @@ var onSuccessGPS  = function(position) {
                         hayGPS=false;
                         document.getElementById('gps').className = 'estado no';
                         
-                         $jsonp.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
+                         $jsonp1.send(' http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {
                          //$jsonp.send(' http://localhost/yii/ws_clima_inta/index.php/api/listaEmas?callback=handleStuff', {   
                             callbackName: 'handleStuff',
                             onSuccess: function(json){
@@ -164,12 +164,19 @@ var onSuccessGPS  = function(position) {
               //  xmlHttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
                // xmlHttp.send(null);
               
-                $jsonp.send('http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
-                //$jsonp.send('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
-                        callbackName: 'handleStuff',
-                        onSuccess: function(json){
-                      //  console.log('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff');
+//                        $jsonp1.send('http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
+//                //$jsonp1.send('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff', {
+//                        callbackName: 'handleStuff',
+//                        onSuccess: function(json){
+//                      //  console.log('http://localhost/yii/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=handleStuff');
                       //  console.log('success!', json);
+                     $.ajax({
+                                url: 'http://meta.fi.uncoma.edu.ar/cuentagotas/ws_clima_inta/index.php/api/datosActuales/ema/'+ema[emaSeleccionada][4]+'?callback=rr',
+                                type: "GET",
+                                dataType: "jsonp",
+                                success: function(json){
+                      
+                      
                         if (json.error==""){
                                 //alert(json.error);
                                 var datosEMA=json;
@@ -221,24 +228,28 @@ var onSuccessGPS  = function(position) {
                                 error='<ul><li id="ema" onClick="overlay();"><p>Problemas con la Estacion</p></li></ul>';
                                 $("#weather").html('<p>'+error+'</p>');
                               }
-                        },
+                        }   
                                                
-                        onTimeout: function(){
-                            //console.log('timeout!');
-                            
-                            error='Problemas de comunicacion';
-                              $("#weather").html('<p>'+error+'</p>');
-                        },
-                    timeout: 5
+//                        onTimeout: function(){
+//                            //console.log('timeout!');
+//                            
+//                            error='Problemas de comunicacion';
+//                              $("#weather").html('<p>'+error+'</p>');
+//                        },
+//                    timeout: 5
                 });
              // navigator.app.clearCache();
               //setTimeout(verDatosEMA,2*60*1000);
               //window.cache.clear();
           }
     function datos(){
+              //window.cache.clear();
+              //navigator.app.clearCache();
+              $.ajaxSetup({ cache:false });
               verDatosEMA();
            // navigator.app.clearCache();
-              setTimeout(verDatosEMA,2*60*1000);
+              setTimeout(datos,2*60*1000);
+              
               window.cache.clear();
               navigator.app.clearCache();
         
