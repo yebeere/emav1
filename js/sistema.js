@@ -117,7 +117,8 @@ var onSuccessGPS  = function(position) {
     }
     function verDatosEMA(){
                  var mobile = detectmobile(navigator.userAgent||navigator.vendor||window.opera);  
-                if( mobile == true ){  
+                if( mobile == true ){
+                         alert("Es movil!");
                         pantalla();//
                    }
                 var e = document.getElementById("comboemas");
@@ -138,34 +139,7 @@ var onSuccessGPS  = function(position) {
                                 weather = {};
                                 units='C';
                                 
-                                limitesuperior=document.getElementById("limitesuperior").value;
-                                limiteinferior=document.getElementById("limiteinferior").value;
-                                if (parseFloat(datosEMA.temperatura) > limitesuperior) {
-                                    
-                                   $('#clima').delay(1500).css('background-color', '#F7AC57');
-                                   $('#weather h2').css('color', '#fff');
-                                     navigator.notification.vibrate(1000);
-                                     if ($('#sonido').value=='si')
-                                          {if (!ls) { navigator.notification.beep(1);   }}
-                                     ls=true;
-                                       //animate({backgroundColor: '#F7AC57'}, 1500);
-                                 } else {
-                                     if (parseFloat(datosEMA.temperatura) < limiteinferior){
-                                        $('#clima').delay(1500).css('background-color', '#0091c2');
-                                        $('#weather h2').css('color', '#fff');
-                                            //animate({backgroundColor: '#0091c2'}, 1500);
-                                           navigator.notification.vibrate(1000);
-                                           if ($('#sonido').value=='si')
-                                                {if (!li) { navigator.notification.beep(1);   }}
-                                            li=true;
-                                           
-                                     }
-                                     else {
-                                         $('#clima').delay(1500).css('background-color', '#84FF8E');
-                                         $("#weather h2").css("color", "blac");
-                                             //animate({backgroundColor: '#84FF8E'}, 1500);
-                                     }
-                                 }
+                                
                                 moment.locale('es');
                                 fecha1 ='20'+moment(datosEMA.fecha,['DD/MM/YY','D/MM/YY']).format('YY-MM-DD')+' '+datosEMA.hora;;
                                 //console.log('ti='+fecha1);
@@ -189,7 +163,38 @@ var onSuccessGPS  = function(position) {
 
                                 $("#weather").html(html);                                
                                 
-                                
+                                limitesuperior=document.getElementById("limitesuperior").value;
+                                limiteinferior=document.getElementById("limiteinferior").value;
+                                if (parseFloat(datosEMA.temperatura) > limitesuperior) {
+                                    
+                                   $('#clima').delay(1500).css('background-color', '#F7AC57');
+                                   $('#weather h2').css('color','#fff');
+                                    //document.getElementById('ema').style.color = '#fff';
+                                     navigator.notification.vibrate(1000);
+                                     if ($('#sonido').value=='si')
+                                          {if (ls==false) { navigator.notification.beep(1);   }}
+                                     ls=true;
+                                       //animate({backgroundColor: '#F7AC57'}, 1500);
+                                 } else {
+                                     if (parseFloat(datosEMA.temperatura) < limiteinferior){
+                                        $('#clima').delay(1500).css('background-color', '#0091c2');
+                                        $('#weather h2').css('color','#fff');
+                                        //document.getElementById('ema').style.color = '#fff';
+                                            //animate({backgroundColor: '#0091c2'}, 1500);
+                                           navigator.notification.vibrate(1000);
+                                           if ($('#sonido').value=='si')
+                                                {if (li==false) { navigator.notification.beep(1);   }}
+                                            li=true;
+                                           
+                                     }
+                                     else {
+                                         $('#clima').delay(1500).css('background-color', '#84FF8E');
+                                         $('#weather h2').css('color','#000');
+                                         //document.getElementById('ema').style.color = '#000000';
+                                         //$("#weather h2").css("textcolor", "black");
+                                             //animate({backgroundColor: '#84FF8E'}, 1500);
+                                     }
+                                 }
                                 
                         } else {
                                 
@@ -209,6 +214,7 @@ var onSuccessGPS  = function(position) {
     }
     function pantalla(){
               if ($('#apagado').value=='no'){
+                  alert("No apaga la pantalla");
                    window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
               } else {
                    window.plugins.insomnia.allowSleepAgain();// volver a permitir apagado de pantalla
