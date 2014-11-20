@@ -169,7 +169,7 @@ var onSuccessGPS  = function(position) {
                                    $('#clima').delay(1500).css('background-color', '#F7AC57');
                                    $('#weather h2').css('color','#fff');
                                     //document.getElementById('ema').style.color = '#fff';
-                                     navigator.notification.vibrate(1000);
+                                     //navigator.notification.vibrate(1000);
                                      if ($('#sonido').value=='si')
                                           {if (ls==false) { navigator.notification.beep(1);   }}
                                      ls=true;
@@ -180,7 +180,7 @@ var onSuccessGPS  = function(position) {
                                         $('#weather h2').css('color','#fff');
                                         //document.getElementById('ema').style.color = '#fff';
                                             //animate({backgroundColor: '#0091c2'}, 1500);
-                                           navigator.notification.vibrate(1000);
+                                           //navigator.notification.vibrate(1000);
                                            if ($('#sonido').value=='si')
                                                 {if (li==false) { navigator.notification.beep(1);   }}
                                             li=true;
