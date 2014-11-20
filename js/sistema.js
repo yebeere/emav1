@@ -116,10 +116,9 @@ var onSuccessGPS  = function(position) {
                         
     }
     function verDatosEMA(){
-                 var mobile = detectmobile(navigator.userAgent||navigator.vendor||window.opera);  
+                var mobile = detectmobile(navigator.userAgent||navigator.vendor||window.opera);  
                 if( mobile == true ){
-                         alert("Es movil!");
-                        pantalla();//
+                       window.plugins.insomnia.keepAwake();
                    }
                 var e = document.getElementById("comboemas");
                 var emaSeleccionada = e.options[e.selectedIndex].value;
@@ -212,14 +211,7 @@ var onSuccessGPS  = function(position) {
               navigator.app.clearCache();
         
     }
-    function pantalla(){
-              if ($('#apagado').value=='no'){
-                  alert("No apaga la pantalla");
-                   window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
-              } else {
-                   window.plugins.insomnia.allowSleepAgain();// volver a permitir apagado de pantalla
-              }
-    }
+
     
     function detectmobile(a){  
         var mobile = false;  
