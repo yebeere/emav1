@@ -161,7 +161,7 @@ var onSuccessGPS  = function(position) {
 
 
                                 $("#weather").html(html);                                
-                                
+                                var audio = new Audio('sonido/alarma_5.mp3');
                                 limitesuperior=document.getElementById("limitesuperior").value;
                                 limiteinferior=document.getElementById("limiteinferior").value;
                                 if (parseFloat(datosEMA.temperatura) > limitesuperior) {
@@ -170,30 +170,42 @@ var onSuccessGPS  = function(position) {
                                    $('#weather h2').css('color','#fff');
                                     //document.getElementById('ema').style.color = '#fff';
                                      //navigator.notification.vibrate(1000);
-                                     if ($('#sonido').value=='si')
-                                          {if (ls==false) { navigator.notification.beep(1);   }}
-                                     ls=true;
-                                       //animate({backgroundColor: '#F7AC57'}, 1500);
+                                     valor=$('#sonido').val();
+                                     if ($('#sonido').val()=='si'){
+                                              if (!ls) { 
+                                                  ls=true;
+//                                                  navigator.notification.beep(1);
+//                                                  navigator.notification.vibrate(1000);
+                                                  audio.play();
+                                              }
+                                      }
                                  } else {
                                      if (parseFloat(datosEMA.temperatura) < limiteinferior){
                                         $('#clima').delay(1500).css('background-color', '#0091c2');
                                         $('#weather h2').css('color','#fff');
-                                        //document.getElementById('ema').style.color = '#fff';
-                                            //animate({backgroundColor: '#0091c2'}, 1500);
-                                           //navigator.notification.vibrate(1000);
-                                           if ($('#sonido').value=='si')
-                                                {if (li==false) { navigator.notification.beep(1);   }}
-                                            li=true;
+                                        if ($('#sonido').val()=='si')
+                                                {
+                                                    if (li==false) { 
+                                                        li=true;
+//                                                        navigator.notification.beep(1);
+//                                                        navigator.notification.vibrate(1000);
+                                                        audio.play();
+                                                    }
+                                                    
+                                                }
                                            
                                      }
                                      else {
                                          $('#clima').delay(1500).css('background-color', '#84FF8E');
                                          $('#weather h2').css('color','#000');
-                                         //document.getElementById('ema').style.color = '#000000';
-                                         //$("#weather h2").css("textcolor", "black");
-                                             //animate({backgroundColor: '#84FF8E'}, 1500);
+                                         if ($('#sonido').val()=='si')
+                                                {
+                                                        li=false;
+                                                        ls=false
+                                                    }
+                                                    
+                                                }   //animate({backgroundColor: '#84FF8E'}, 1500);
                                      }
-                                 }
                                 
                         } else {
                                 
@@ -207,8 +219,8 @@ var onSuccessGPS  = function(position) {
               $.ajaxSetup({ cache:false });
               verDatosEMA();
               setTimeout(datos,2*60*1000);
-              window.cache.clear();
-              navigator.app.clearCache();
+//              window.cache.clear();
+//              navigator.app.clearCache();
         
     }
 
