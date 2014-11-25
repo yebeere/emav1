@@ -161,7 +161,6 @@ var onSuccessGPS  = function(position) {
 
 
                                 $("#weather").html(html);                                
-                                var audio = new Audio('sonido/alarma_5.mp3');
                                 limitesuperior=document.getElementById("limitesuperior").value;
                                 limiteinferior=document.getElementById("limiteinferior").value;
                                 if (parseFloat(datosEMA.temperatura) > limitesuperior) {
@@ -176,6 +175,7 @@ var onSuccessGPS  = function(position) {
                                                   ls=true;
 //                                                  navigator.notification.beep(1);
 //                                                  navigator.notification.vibrate(1000);
+                                                  var audio = new Audio('sonidos/alarma_5.mp3');
                                                   audio.play();
                                               }
                                       }
@@ -189,6 +189,7 @@ var onSuccessGPS  = function(position) {
                                                         li=true;
 //                                                        navigator.notification.beep(1);
 //                                                        navigator.notification.vibrate(1000);
+                                                        var audio = new Audio('sonidos/alarma_5.mp3');
                                                         audio.play();
                                                     }
                                                     
