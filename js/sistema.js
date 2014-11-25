@@ -173,10 +173,10 @@ var onSuccessGPS  = function(position) {
                                      if ($('#sonido').val()=='si'){
                                               if (!ls) { 
                                                   ls=true;
-//                                                  navigator.notification.beep(1);
-//                                                  navigator.notification.vibrate(1000);
                                                   var audio = new Audio('sonidos/alarma_5.mp3');
                                                   audio.play();
+                                                  navigator.notification.beep(1);
+                                                  navigator.notification.vibrate(1000);
                                               }
                                       }
                                  } else {
@@ -187,10 +187,10 @@ var onSuccessGPS  = function(position) {
                                                 {
                                                     if (li==false) { 
                                                         li=true;
-//                                                        navigator.notification.beep(1);
-//                                                        navigator.notification.vibrate(1000);
                                                         var audio = new Audio('sonidos/alarma_5.mp3');
                                                         audio.play();
+                                                        navigator.notification.beep(1);
+                                                        navigator.notification.vibrate(1000);
                                                     }
                                                     
                                                 }
