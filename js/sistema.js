@@ -140,6 +140,7 @@ var onSuccessGPS  = function(position) {
                                 
                                 
                                 moment.locale('es');
+                                if (datosEMA.hora.length<5){datosEMA.hora='0'+datosEMA.hora;}
                                 fecha1 ='20'+moment(datosEMA.fecha,['DD/MM/YY','D/MM/YY']).format('YY-MM-DD')+' '+datosEMA.hora;;
                                 //console.log('ti='+fecha1);
                                 fecha2=moment(fecha1).format('DD/MM/YYYY HH:mm');
