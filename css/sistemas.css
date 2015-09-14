@@ -101,7 +101,7 @@ table tr td {
 	background-repeat: no-repeat;
 	width: 85px;
 	height: 92px;
-	float: left;
+	//float: left;
 }
 #app #second-page #main #estacionAuto {
 	display: block;
@@ -258,7 +258,7 @@ root {
   
   padding: 45px 0;
   font: 13px 'Open Sans', "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  background: #84FF8E;
+  background: #00cc66;
 }
 
 

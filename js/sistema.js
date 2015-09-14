@@ -182,7 +182,7 @@ var onSuccessGPS  = function(position) {
                                       }
                                  } else {
                                      if (parseFloat(datosEMA.temperatura) < limiteinferior){
-                                        $('#clima').delay(1500).css('background-color', '#0091c2');
+                                        $('#clima').delay(1500).css('background-color', '#0099cc');
                                         $('#weather h2').css('color','#fff');
                                         if ($('#sonido').val()=='si')
                                                 {
@@ -198,7 +198,7 @@ var onSuccessGPS  = function(position) {
                                            
                                      }
                                      else {
-                                         $('#clima').delay(1500).css('background-color', '#84FF8E');
+                                         $('#clima').delay(1500).css('background-color', '#00cc66');//#84FF8E
                                          $('#weather h2').css('color','#000');
                                          if ($('#sonido').val()=='si')
                                                 {
