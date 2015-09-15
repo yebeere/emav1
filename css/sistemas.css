@@ -336,10 +336,11 @@ root {
 	left: 15%;
 	max-width: 351px;
 	text-align: justify;
+	width: 80%;
 }
 #uso #main #responsabilidad{
 	
-	width: 80%;
+	width: 80;
      margin: 0 auto;
 	text-align: justify;
 }
