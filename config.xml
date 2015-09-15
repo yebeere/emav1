@@ -2,7 +2,7 @@
 <widget id="com.phonegap.AgroCLIMA" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>AgroCLIMA</name>
     <description>
-        Estaciones Meteorológicas del  Alto Valle - Facultad de Informática - UNComahue
+        Estaciones Meteorológicas del  Alto Valle - INTA Estación Experimental Agropecuaria Alto Valle -Fac.de Informática - UNComahue
     </description>
     <author email="luy5br@gmail.com" href="">
         Lorena Gonzalez - Daniel Toth
