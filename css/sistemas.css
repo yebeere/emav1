@@ -104,10 +104,10 @@ table tr td {
 	font-weight: bold;
 }
 #logo_inta {
-	margin-top: 15px;
+	margin-top: 0px;
 	margin-right: auto;
 	margin-left: auto;
-	margin-bottom: 0;
+	margin-bottom: 15px;
 	padding-top: 20px;
 	
 }
