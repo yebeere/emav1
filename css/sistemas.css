@@ -53,8 +53,11 @@ and open the template in the editor.
 	background-position: 91% 30%;
 	position: relative;
 	background-position: 91% 35%;
-	left: 15%;
+	
 	max-width: 350px;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
 }
 #third-page #datosMeteo #resultados {
 	border-top-color: #3279D9;
@@ -333,11 +336,12 @@ root {
 	background-position: 91% 30%;
 	position: relative;
 	background-position: 91% 35%;
-	left: 15%;
 	max-width: 351px;
 	text-align: justify;
-	width: 80%;
-        margin-top: 20px;
+	width: 351px;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
 }
 #uso #main #responsabilidad{
 	
